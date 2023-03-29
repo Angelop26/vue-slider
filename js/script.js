@@ -44,6 +44,7 @@ createApp({
             this.autoScroll()
         },
         showPrev(){
+            clearInterval(this.interval)
             if(this.indexImage > 0){
                 this.indexImage--
             }else{
@@ -55,6 +56,10 @@ createApp({
         },
         blockAutoScroll(){
             clearInterval(this.interval)
+        },
+        showThisImage(a){
+            this.blockAutoScroll()
+            this.indexImage = a
         }
     }
 }).mount('#app')
