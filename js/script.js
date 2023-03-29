@@ -3,6 +3,7 @@ const {createApp} = Vue
 createApp({
     data(){
         return{
+            interval: null,
             indexImage: 0 ,
             slides:[
                 {
@@ -29,13 +30,18 @@ createApp({
             ]
         }
     },
+    mounted(){
+        this.autoScroll()
+    },
     methods:{
         showNext(){
+            clearInterval(this.interval)
             if(this.indexImage < this.slides.length - 1){
                 this.indexImage++
             } else{
                 this.indexImage = 0
             }
+            this.autoScroll()
         },
         showPrev(){
             if(this.indexImage > 0){
@@ -43,6 +49,12 @@ createApp({
             }else{
                 this.indexImage = this.slides.length - 1
             }
+        },
+        autoScroll(){
+            this.interval = setInterval(this.showNext, 3000)
+        },
+        blockAutoScroll(){
+            clearInterval(this.interval)
         }
     }
 }).mount('#app')
